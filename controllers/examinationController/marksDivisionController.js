@@ -1,59 +1,10 @@
-import MarksDivisionModel from '../../models/examinationModels/marksDivisionModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { marksDivisionSchema } from '../../models/examinationModels/examinationModel.js';
 
-export const getAllMarksDivision = (req, res) => {
+const ctrl = crudFactory(marksDivisionSchema, 'MarksDivision');
 
-    MarksDivisionModel.getAll((err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json(result);
-
-    });
-
-};
-
-export const createMarksDivision = (req, res) => {
-
-    MarksDivisionModel.create(req.body, (err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json({
-            message: 'Marks Division Added'
-        });
-
-    });
-
-};
-
-export const updateMarksDivision = (req, res) => {
-
-    MarksDivisionModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) return res.status(500).json(err);
-
-            res.json({
-                message: 'Marks Division Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteMarksDivision = (req, res) => {
-
-    MarksDivisionModel.delete(req.params.id, (err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json({
-            message: 'Marks Division Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

@@ -1,67 +1,10 @@
-import SubjectGroupModel from '../../models/academicModels/subjectGroupModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { subjectGroupSchema } from '../../models/academicModels/classModel.js';
 
-export const getAllSubjectGroup = (req, res) => {
+const ctrl = crudFactory(subjectGroupSchema, 'SubjectGroup');
 
-    SubjectGroupModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createSubjectGroup = (req, res) => {
-
-    SubjectGroupModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Subject Group Added'
-        });
-
-    });
-
-};
-
-export const updateSubjectGroup = (req, res) => {
-
-    SubjectGroupModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Subject Group Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteSubjectGroup = (req, res) => {
-
-    SubjectGroupModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Subject Group Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

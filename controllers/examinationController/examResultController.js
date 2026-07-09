@@ -1,59 +1,10 @@
-import ExamResultModel from '../../models/examinationModels/examResultModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { examResultSchema } from '../../models/examinationModels/examinationModel.js';
 
-export const getAllExamResult = (req, res) => {
+const ctrl = crudFactory(examResultSchema, 'ExamResult');
 
-    ExamResultModel.getAll((err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json(result);
-
-    });
-
-};
-
-export const createExamResult = (req, res) => {
-
-    ExamResultModel.create(req.body, (err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json({
-            message: 'Exam Result Added'
-        });
-
-    });
-
-};
-
-export const updateExamResult = (req, res) => {
-
-    ExamResultModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) return res.status(500).json(err);
-
-            res.json({
-                message: 'Exam Result Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteExamResult = (req, res) => {
-
-    ExamResultModel.delete(req.params.id, (err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json({
-            message: 'Exam Result Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

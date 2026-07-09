@@ -1,67 +1,10 @@
-import AssignClassTeacherModel from '../../models/academicModels/assignClassTeacherModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { assignClassTeacherSchema } from '../../models/academicModels/classModel.js';
 
-export const getAllAssignTeacher = (req, res) => {
+const ctrl = crudFactory(assignClassTeacherSchema, 'AssignClassTeacher');
 
-    AssignClassTeacherModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createAssignTeacher = (req, res) => {
-
-    AssignClassTeacherModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Teacher Assigned Successfully'
-        });
-
-    });
-
-};
-
-export const updateAssignTeacher = (req, res) => {
-
-    AssignClassTeacherModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Assigned Teacher Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteAssignTeacher = (req, res) => {
-
-    AssignClassTeacherModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Assigned Teacher Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

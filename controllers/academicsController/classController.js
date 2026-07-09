@@ -1,67 +1,10 @@
-import ClassModel from '../../models/academicModels/classModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { classSchema } from '../../models/academicModels/classModel.js';
 
-export const getAllClasses = (req, res) => {
+const ctrl = crudFactory(classSchema, 'Class');
 
-    ClassModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createClass = (req, res) => {
-
-    ClassModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Class Added'
-        });
-
-    });
-
-};
-
-export const updateClass = (req, res) => {
-
-    ClassModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Class Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteClass = (req, res) => {
-
-    ClassModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Class Deleted'
-        });
-
-    });
-
-};
+export const getAllClasses   = ctrl.getAll;
+export const getClassById   = ctrl.getById;
+export const createClass    = ctrl.create;
+export const updateClass    = ctrl.update;
+export const deleteClass    = ctrl.delete;

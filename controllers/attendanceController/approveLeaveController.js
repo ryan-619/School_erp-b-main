@@ -1,82 +1,10 @@
-import ApproveLeaveModel from '../../models/attendanceModels/approveLeaveModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { studentLeaveSchema } from '../../models/attendanceModels/attendanceModel.js';
 
-export const getAllLeaves = (req, res) => {
+const ctrl = crudFactory(studentLeaveSchema, 'StudentLeave');
 
-    ApproveLeaveModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const getLeaveById = (req, res) => {
-
-    ApproveLeaveModel.getById(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createLeave = (req, res) => {
-
-    ApproveLeaveModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Leave Applied Successfully',
-            result
-        });
-
-    });
-
-};
-
-export const updateLeave = (req, res) => {
-
-    ApproveLeaveModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Leave Updated Successfully'
-            });
-
-        }
-    );
-
-};
-
-export const deleteLeave = (req, res) => {
-
-    ApproveLeaveModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Leave Deleted Successfully'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

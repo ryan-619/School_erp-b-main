@@ -1,59 +1,10 @@
-import DesignAdmitCardModel from '../../models/examinationModels/designAdmitCardModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { designAdmitCardSchema } from '../../models/examinationModels/examinationModel.js';
 
-export const getAllAdmitCard = (req, res) => {
+const ctrl = crudFactory(designAdmitCardSchema, 'DesignAdmitCard');
 
-    DesignAdmitCardModel.getAll((err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json(result);
-
-    });
-
-};
-
-export const createAdmitCard = (req, res) => {
-
-    DesignAdmitCardModel.create(req.body, (err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json({
-            message: 'Admit Card Design Added'
-        });
-
-    });
-
-};
-
-export const updateAdmitCard = (req, res) => {
-
-    DesignAdmitCardModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) return res.status(500).json(err);
-
-            res.json({
-                message: 'Admit Card Design Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteAdmitCard = (req, res) => {
-
-    DesignAdmitCardModel.delete(req.params.id, (err, result) => {
-
-        if (err) return res.status(500).json(err);
-
-        res.json({
-            message: 'Admit Card Design Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;
