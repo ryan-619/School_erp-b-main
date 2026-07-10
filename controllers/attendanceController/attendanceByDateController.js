@@ -9,7 +9,6 @@ export const getAttendanceByDate = async (req, res) => {
     let Attendance;
     try { Attendance = db.model('StudentAttendance'); }
     catch { Attendance = db.model('StudentAttendance', studentAttendanceSchema); }
-
     const page  = Math.max(1, parseInt(req.query.page)  || 1);
     const limit = Math.min(100, parseInt(req.query.limit) || 25);
     const skip  = (page - 1) * limit;
