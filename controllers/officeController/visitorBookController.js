@@ -1,67 +1,10 @@
-import VisitorBookModel from '../../models/officeModels/visitorBookModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { visitorBookSchema } from '../../models/officeModels/officeModel.js';
 
-export const getAllVisitors = (req, res) => {
+const ctrl = crudFactory(visitorBookSchema, 'VisitorBook');
 
-    VisitorBookModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createVisitor = (req, res) => {
-
-    VisitorBookModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Visitor Added'
-        });
-
-    });
-
-};
-
-export const updateVisitor = (req, res) => {
-
-    VisitorBookModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Visitor Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteVisitor = (req, res) => {
-
-    VisitorBookModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Visitor Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

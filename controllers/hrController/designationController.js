@@ -1,87 +1,10 @@
-import DesignationModel from '../../models/hrModels/designationModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { designationSchema } from '../../models/hrModels/hrModel.js';
 
-export const getAllDesignation=(req,res)=>{
+const ctrl = crudFactory(designationSchema, 'Designation');
 
-DesignationModel.getAll((err,result)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json(result);
-
-});
-
-};
-
-export const getDesignationById=(req,res)=>{
-
-DesignationModel.getById(
-req.params.id,
-(err,result)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json(result);
-
-});
-
-};
-
-export const createDesignation=(req,res)=>{
-
-DesignationModel.create(
-req.body,
-(err,result)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json({
-message:'Designation Added',
-result
-});
-
-});
-
-};
-
-export const updateDesignation=(req,res)=>{
-
-DesignationModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json({
-message:'Designation Updated'
-});
-
-});
-
-};
-
-export const deleteDesignation=(req,res)=>{
-
-DesignationModel.delete(
-req.params.id,
-(err)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json({
-message:'Designation Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

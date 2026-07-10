@@ -1,48 +1,10 @@
-import ApplyLeaveModel from '../../models/hrModels/applyLeaveModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { applyLeaveSchema } from '../../models/hrModels/hrModel.js';
 
-export const getAllApplyLeave=(req,res)=>{
+const ctrl = crudFactory(applyLeaveSchema, 'ApplyLeave');
 
-ApplyLeaveModel.getAll((err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createApplyLeave=(req,res)=>{
-
-ApplyLeaveModel.create(
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Leave Applied'
-});
-
-});
-
-};
-
-export const deleteApplyLeave=(req,res)=>{
-
-ApplyLeaveModel.delete(
-req.params.id,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

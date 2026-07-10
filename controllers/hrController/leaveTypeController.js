@@ -1,60 +1,10 @@
-import LeaveTypeModel from '../../models/hrModels/leaveTypeModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { leaveTypeSchema } from '../../models/hrModels/hrModel.js';
 
-export const getAllLeaveType=(req,res)=>{
+const ctrl = crudFactory(leaveTypeSchema, 'LeaveType');
 
-LeaveTypeModel.getAll((err,result)=>{
-
-if(err) return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createLeaveType=(req,res)=>{
-
-LeaveTypeModel.create(req.body,(err)=>{
-
-if(err) return res.status(500).json(err);
-
-res.json({
-message:'Leave Type Added'
-});
-
-});
-
-};
-
-export const updateLeaveType=(req,res)=>{
-
-LeaveTypeModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err) return res.status(500).json(err);
-
-res.json({
-message:'Updated'
-});
-
-});
-
-};
-
-export const deleteLeaveType=(req,res)=>{
-
-LeaveTypeModel.delete(
-req.params.id,
-(err)=>{
-
-if(err) return res.status(500).json(err);
-
-res.json({
-message:'Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

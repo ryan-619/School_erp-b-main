@@ -1,46 +1,10 @@
-import CopyOldLessonsModel from '../../models/lessionModels/copyOldLessonsModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { lessonSchema } from '../../models/lessonModels/lessonModel.js';
 
-export const getAllCopied=(req,res)=>{
+const ctrl = crudFactory(lessonSchema, 'Lesson');
 
-    CopyOldLessonsModel.getAll((err,result)=>{
-
-        if(err) return res.status(500).json(err);
-
-        res.json(result);
-
-    });
-
-}
-
-export const createCopy=(req,res)=>{
-
-    CopyOldLessonsModel.create(
-        req.body,
-        (err,result)=>{
-
-        if(err) return res.status(500).json(err);
-
-        res.json({
-            message:'Lessons Copied',
-            result
-        });
-
-    });
-
-}
-
-export const deleteCopy=(req,res)=>{
-
-    CopyOldLessonsModel.delete(
-        req.params.id,
-        (err)=>{
-
-        if(err) return res.status(500).json(err);
-
-        res.json({
-            message:'Deleted'
-        });
-
-    });
-
-}
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

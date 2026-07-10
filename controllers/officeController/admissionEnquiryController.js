@@ -1,82 +1,10 @@
-import AdmissionEnquiryModel from '../../models/officeModels/admissionEnquiryModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { admissionEnquirySchema } from '../../models/officeModels/officeModel.js';
 
-export const getAllAdmissionEnquiry = (req, res) => {
+const ctrl = crudFactory(admissionEnquirySchema, 'AdmissionEnquiry');
 
-    AdmissionEnquiryModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const getAdmissionEnquiryById = (req, res) => {
-
-    AdmissionEnquiryModel.getById(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createAdmissionEnquiry = (req, res) => {
-
-    AdmissionEnquiryModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Admission Enquiry Added',
-            result
-        });
-
-    });
-
-};
-
-export const updateAdmissionEnquiry = (req, res) => {
-
-    AdmissionEnquiryModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Admission Enquiry Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteAdmissionEnquiry = (req, res) => {
-
-    AdmissionEnquiryModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Admission Enquiry Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

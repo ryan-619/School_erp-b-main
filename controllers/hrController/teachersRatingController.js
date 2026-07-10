@@ -1,87 +1,10 @@
-import TeachersRatingModel from '../../models/hrModels/teachersRatingModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { teachersRatingSchema } from '../../models/hrModels/hrModel.js';
 
-export const getAllTeachersRating=(req,res)=>{
+const ctrl = crudFactory(teachersRatingSchema, 'TeachersRating');
 
-TeachersRatingModel.getAll((err,result)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json(result);
-
-});
-
-};
-
-export const getTeachersRatingById=(req,res)=>{
-
-TeachersRatingModel.getById(
-req.params.id,
-(err,result)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json(result);
-
-});
-
-};
-
-export const createTeachersRating=(req,res)=>{
-
-TeachersRatingModel.create(
-req.body,
-(err,result)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json({
-message:'Teacher Rating Added',
-result
-});
-
-});
-
-};
-
-export const updateTeachersRating=(req,res)=>{
-
-TeachersRatingModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json({
-message:'Teacher Rating Updated'
-});
-
-});
-
-};
-
-export const deleteTeachersRating=(req,res)=>{
-
-TeachersRatingModel.delete(
-req.params.id,
-(err)=>{
-
-if(err){
-return res.status(500).json(err);
-}
-
-res.json({
-message:'Teacher Rating Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

@@ -1,67 +1,10 @@
-import PostalDispatchModel from '../../models/officeModels/postalDispatchModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { postalDispatchSchema } from '../../models/officeModels/officeModel.js';
 
-export const getAllDispatch = (req, res) => {
+const ctrl = crudFactory(postalDispatchSchema, 'PostalDispatch');
 
-    PostalDispatchModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createDispatch = (req, res) => {
-
-    PostalDispatchModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Postal Dispatch Added'
-        });
-
-    });
-
-};
-
-export const updateDispatch = (req, res) => {
-
-    PostalDispatchModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Postal Dispatch Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteDispatch = (req, res) => {
-
-    PostalDispatchModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Postal Dispatch Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

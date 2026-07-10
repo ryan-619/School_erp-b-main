@@ -1,67 +1,10 @@
-import PhoneCallLogModel from '../../models/officeModels/phoneCallLogModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { phoneCallLogSchema } from '../../models/officeModels/officeModel.js';
 
-export const getAllCallLogs = (req, res) => {
+const ctrl = crudFactory(phoneCallLogSchema, 'PhoneCallLog');
 
-    PhoneCallLogModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createCallLog = (req, res) => {
-
-    PhoneCallLogModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Call Log Added'
-        });
-
-    });
-
-};
-
-export const updateCallLog = (req, res) => {
-
-    PhoneCallLogModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Call Log Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteCallLog = (req, res) => {
-
-    PhoneCallLogModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Call Log Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

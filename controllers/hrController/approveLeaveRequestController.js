@@ -1,62 +1,10 @@
-import ApproveLeaveRequestModel from '../../models/hrModels/approveLeaveRequestModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { applyLeaveSchema } from '../../models/hrModels/hrModel.js';
 
-export const getLeaveRequests=(req,res)=>{
+const ctrl = crudFactory(applyLeaveSchema, 'ApplyLeave');
 
- ApproveLeaveRequestModel.getAll((err,result)=>{
-
- if(err) return res.status(500).json(err);
-
- res.json(result);
-
- });
-
-};
-
-export const createLeaveRequest=(req,res)=>{
-
- ApproveLeaveRequestModel.create(
- req.body,
- (err,result)=>{
-
- if(err) return res.status(500).json(err);
-
- res.json({
- message:'Leave Request Added'
- });
-
- });
-
-};
-
-export const updateLeaveRequest=(req,res)=>{
-
- ApproveLeaveRequestModel.update(
- req.params.id,
- req.body,
- (err)=>{
-
- if(err) return res.status(500).json(err);
-
- res.json({
- message:'Leave Request Updated'
- });
-
- });
-
-};
-
-export const deleteLeaveRequest=(req,res)=>{
-
- ApproveLeaveRequestModel.delete(
- req.params.id,
- (err)=>{
-
- if(err) return res.status(500).json(err);
-
- res.json({
- message:'Deleted'
- });
-
- });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

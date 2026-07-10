@@ -1,82 +1,10 @@
-import AddIncomeModel from '../../models/incomeModels/addIncomeModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { incomeSchema } from '../../models/incomeModels/incomeModel.js'
 
-export const getAllIncome = (req, res) => {
+const ctrl = crudFactory(incomeSchema, 'Income');
 
-    AddIncomeModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const getIncomeById = (req, res) => {
-
-    AddIncomeModel.getById(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createIncome = (req, res) => {
-
-    AddIncomeModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Income Added Successfully',
-            result
-        });
-
-    });
-
-};
-
-export const updateIncome = (req, res) => {
-
-    AddIncomeModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Income Updated Successfully'
-            });
-
-        }
-    );
-
-};
-
-export const deleteIncome = (req, res) => {
-
-    AddIncomeModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Income Deleted Successfully'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

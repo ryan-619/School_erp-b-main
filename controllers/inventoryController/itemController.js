@@ -1,58 +1,10 @@
-import ItemModel from '../../models/inventoryModels/itemModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { itemSchema } from '../../models/inventoryModels/inventoryModel.js';
 
-export const getAllItems = (req, res) => {
-    ItemModel.getAll((err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
+const ctrl = crudFactory(itemSchema, 'Item');
 
-        res.json(result);
-    });
-};
-
-export const getItemById = (req, res) => {
-    ItemModel.getById(req.params.id, (err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-    });
-};
-
-export const createItem = (req, res) => {
-    ItemModel.create(req.body, (err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Item Added',
-            result
-        });
-    });
-};
-
-export const updateItem = (req, res) => {
-    ItemModel.update(req.params.id, req.body, (err) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Item Updated'
-        });
-    });
-};
-
-export const deleteItem = (req, res) => {
-    ItemModel.delete(req.params.id, (err) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Item Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

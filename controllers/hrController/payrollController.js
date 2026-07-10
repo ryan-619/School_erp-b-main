@@ -1,66 +1,10 @@
-import PayrollModel from '../../models/hrModels/payrollModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { payrollSchema } from '../../models/hrModels/hrModel.js';
 
-export const getPayroll=(req,res)=>{
+const ctrl = crudFactory(payrollSchema, 'Payroll');
 
-PayrollModel.getAll((err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createPayroll=(req,res)=>{
-
-PayrollModel.create(
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Payroll Added'
-});
-
-});
-
-};
-
-export const updatePayroll=(req,res)=>{
-
-PayrollModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Payroll Updated'
-});
-
-});
-
-};
-
-export const deletePayroll=(req,res)=>{
-
-PayrollModel.delete(
-req.params.id,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Payroll Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

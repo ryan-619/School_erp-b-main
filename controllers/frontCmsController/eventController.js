@@ -1,58 +1,10 @@
-import EventModel from '../../models/frontCmsModels/eventModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { eventSchema } from '../../models/frontCmsModels/frontCmsModel.js';
 
-export const getAllEvents = (req, res) => {
-    EventModel.getAll((err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
+const ctrl = crudFactory(eventSchema, 'Event');
 
-        res.json(result);
-    });
-};
-
-export const getEventById = (req, res) => {
-    EventModel.getById(req.params.id, (err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-    });
-};
-
-export const createEvent = (req, res) => {
-    EventModel.create(req.body, (err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Event Added',
-            result
-        });
-    });
-};
-
-export const updateEvent = (req, res) => {
-    EventModel.update(req.params.id, req.body, (err) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Event Updated'
-        });
-    });
-};
-
-export const deleteEvent = (req, res) => {
-    EventModel.delete(req.params.id, (err) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Event Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

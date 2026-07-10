@@ -1,66 +1,10 @@
-import StaffAttendanceModel from '../../models/hrModels/staffAttendanceModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { staffAttendanceSchema } from '../../models/hrModels/hrModel.js';
 
-export const getAttendance=(req,res)=>{
+const ctrl = crudFactory(staffAttendanceSchema, 'StaffAttendance');
 
-StaffAttendanceModel.getAll((err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createAttendance=(req,res)=>{
-
-StaffAttendanceModel.create(
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Attendance Added'
-});
-
-});
-
-};
-
-export const updateAttendance=(req,res)=>{
-
-StaffAttendanceModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Updated'
-});
-
-});
-
-};
-
-export const deleteAttendance=(req,res)=>{
-
-StaffAttendanceModel.delete(
-req.params.id,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

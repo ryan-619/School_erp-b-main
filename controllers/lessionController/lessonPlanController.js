@@ -1,66 +1,10 @@
-import LessonPlanModel from '../../models/lessionModels/lessonPlanModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { lessonPlanSchema } from '../../models/lessonModels/lessonModel.js';
 
-export const getAllPlan=(req,res)=>{
+const ctrl = crudFactory(lessonPlanSchema, 'LessonPlan');
 
-LessonPlanModel.getAll((err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createPlan=(req,res)=>{
-
-LessonPlanModel.create(
-req.body,
-(err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Lesson Plan Added'
-});
-
-});
-
-};
-
-export const updatePlan=(req,res)=>{
-
-LessonPlanModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Lesson Updated'
-});
-
-});
-
-};
-
-export const deletePlan=(req,res)=>{
-
-LessonPlanModel.delete(
-req.params.id,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

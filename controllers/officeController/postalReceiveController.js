@@ -1,67 +1,10 @@
-import PostalReceiveModel from '../../models/officeModels/postalReceiveModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { postalReceiveSchema } from '../../models/officeModels/officeModel.js';
 
-export const getAllReceive = (req, res) => {
+const ctrl = crudFactory(postalReceiveSchema, 'PostalReceive');
 
-    PostalReceiveModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createReceive = (req, res) => {
-
-    PostalReceiveModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Postal Receive Added'
-        });
-
-    });
-
-};
-
-export const updateReceive = (req, res) => {
-
-    PostalReceiveModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Postal Receive Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteReceive = (req, res) => {
-
-    PostalReceiveModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Postal Receive Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

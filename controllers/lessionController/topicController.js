@@ -1,64 +1,10 @@
-import TopicModel from '../../models/lessionModels/topicModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { topicSchema } from '../../models/lessonModels/lessonModel.js';
 
-export const getAllTopic=(req,res)=>{
+const ctrl = crudFactory(topicSchema, 'Topic');
 
-TopicModel.getAll((err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createTopic=(req,res)=>{
-
-TopicModel.create(req.body,(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Topic Added'
-});
-
-});
-
-};
-
-export const updateTopic=(req,res)=>{
-
-TopicModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Topic Updated'
-});
-
-});
-
-};
-
-export const deleteTopic=(req,res)=>{
-
-TopicModel.delete(
-req.params.id,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

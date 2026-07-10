@@ -1,66 +1,10 @@
-import SyllabusStatusModel from '../../models/lessionModels/syllabusStatusModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { syllabusStatusSchema } from '../../models/lessonModels/lessonModel.js';
 
-export const getAllStatus=(req,res)=>{
+const ctrl = crudFactory(syllabusStatusSchema, 'SyllabusStatus');
 
-SyllabusStatusModel.getAll((err,result)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json(result);
-
-});
-
-};
-
-export const createStatus=(req,res)=>{
-
-SyllabusStatusModel.create(
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Status Added'
-});
-
-});
-
-};
-
-export const updateStatus=(req,res)=>{
-
-SyllabusStatusModel.update(
-req.params.id,
-req.body,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Updated'
-});
-
-});
-
-};
-
-export const deleteStatus=(req,res)=>{
-
-SyllabusStatusModel.delete(
-req.params.id,
-(err)=>{
-
-if(err)
-return res.status(500).json(err);
-
-res.json({
-message:'Deleted'
-});
-
-});
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;
