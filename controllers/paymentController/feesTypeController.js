@@ -1,59 +1,10 @@
-import FeesTypeModel from '../../models/paymentModels/feesTypeModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { feesTypeSchema } from '../../models/paymentModels/feesModel.js';
 
-export const getAllFeesType = (req, res) => {
+const ctrl = crudFactory(feesTypeSchema, 'FeesType');
 
-    FeesTypeModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-    });
-};
-
-export const createFeesType = (req, res) => {
-
-    FeesTypeModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Type Created'
-        });
-    });
-};
-
-export const updateFeesType = (req, res) => {
-
-    FeesTypeModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Fees Type Updated'
-            });
-        }
-    );
-};
-
-export const deleteFeesType = (req, res) => {
-
-    FeesTypeModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Type Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

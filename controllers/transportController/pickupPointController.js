@@ -1,58 +1,10 @@
-import PickupPointModel from '../../models/transportModels/pickupPointModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { pickupPointSchema } from '../../models/transportModels/transportModel.js';
 
-export const getAllPickupPoints = (req, res) => {
-    PickupPointModel.getAll((err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
+const ctrl = crudFactory(pickupPointSchema, 'PickupPoint');
 
-        res.json(result);
-    });
-};
-
-export const getPickupPointById = (req, res) => {
-    PickupPointModel.getById(req.params.id, (err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-    });
-};
-
-export const createPickupPoint = (req, res) => {
-    PickupPointModel.create(req.body, (err, result) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Pickup Point Added',
-            result
-        });
-    });
-};
-
-export const updatePickupPoint = (req, res) => {
-    PickupPointModel.update(req.params.id, req.body, (err) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Pickup Point Updated'
-        });
-    });
-};
-
-export const deletePickupPoint = (req, res) => {
-    PickupPointModel.delete(req.params.id, (err) => {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Pickup Point Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

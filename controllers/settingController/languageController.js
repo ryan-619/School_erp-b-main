@@ -1,210 +1,41 @@
-import LanguageModel from "../../models/settingModels/languageModel.js";
+import { crudFactory } from '../../utils/crudFactory.js';
+import { languageSchema } from '../../models/settingModels/settingModel.js';
 
+const ctrl = crudFactory(languageSchema, 'Language');
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;
 
-export const getLanguages = (
-    req,
-    res
-) => {
+const getModel = (db) => { try { return db.model('Language'); } catch { return db.model('Language', languageSchema); } };
 
-    LanguageModel.getAll(
-        (err, languages) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message: "Failed to fetch languages",
-                    error: err.message,
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                total: languages.length,
-                data: languages,
-            });
-        }
-    );
+export const setActive = async (req, res) => {
+  try {
+    const Language = getModel(req.tenant.db);
+    await Language.updateMany({}, { is_active: false });
+    const lang = await Language.findByIdAndUpdate(req.params.id, { is_active: true }, { new: true });
+    if (!lang) return res.status(404).json({ success: false, message: 'Language not found' });
+    res.json({ success: true, message: 'Active language set', data: lang });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };
 
-
-
-export const createLanguage = (
-    req,
-    res
-) => {
-
-    LanguageModel.create(
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message: "Failed to create language",
-                    error: err.message,
-                });
-            }
-
-            res.status(201).json({
-                success: true,
-                message: "Language created successfully",
-                languageId: result.insertId,
-            });
-        }
-    );
+export const toggleRtl = async (req, res) => {
+  try {
+    const Language = getModel(req.tenant.db);
+    const lang = await Language.findById(req.params.id);
+    if (!lang) return res.status(404).json({ success: false, message: 'Language not found' });
+    lang.is_rtl = !lang.is_rtl;
+    await lang.save();
+    res.json({ success: true, data: lang });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };
 
-
-
-export const updateLanguage = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    LanguageModel.update(
-        id,
-        req.body,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message: "Failed to update language",
-                    error: err.message,
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message: "Language updated successfully",
-            });
-        }
-    );
-};
-
-
-
-export const updateLanguageStatus = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-    const { status } = req.body;
-
-    LanguageModel.updateStatus(
-        id,
-        status,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message: "Failed to update status",
-                    error: err.message,
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message: "Status updated",
-            });
-        }
-    );
-};
-
-
-
-export const updateRTL = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-    const { is_rtl } = req.body;
-
-    LanguageModel.updateRTL(
-        id,
-        is_rtl,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err.message,
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message: "RTL updated",
-            });
-        }
-    );
-};
-
-
-
-export const setActiveLanguage = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    LanguageModel.clearActive(
-        (err) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            LanguageModel.setActive(
-                id,
-                (err) => {
-
-                    if (err) {
-                        return res.status(500).json(err);
-                    }
-
-                    res.status(200).json({
-                        success: true,
-                        message:
-                            "Active language updated",
-                    });
-                }
-            );
-        }
-    );
-};
-
-
-
-export const deleteLanguage = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    LanguageModel.delete(
-        id,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err.message,
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message:
-                    "Language deleted successfully",
-            });
-        }
-    );
+export const updateStatus = async (req, res) => {
+  try {
+    const Language = getModel(req.tenant.db);
+    const lang = await Language.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
+    if (!lang) return res.status(404).json({ success: false, message: 'Language not found' });
+    res.json({ success: true, data: lang });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };

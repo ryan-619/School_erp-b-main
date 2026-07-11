@@ -1,59 +1,10 @@
-import FeesDiscountModel from '../../models/paymentModels/feesDiscountModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { feesDiscountSchema } from '../../models/paymentModels/feesModel.js';
 
-export const getAllFeesDiscount = (req, res) => {
+const ctrl = crudFactory(feesDiscountSchema, 'FeesDiscount');
 
-    FeesDiscountModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-    });
-};
-
-export const createFeesDiscount = (req, res) => {
-
-    FeesDiscountModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Discount Created'
-        });
-    });
-};
-
-export const updateFeesDiscount = (req, res) => {
-
-    FeesDiscountModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Fees Discount Updated'
-            });
-        }
-    );
-};
-
-export const deleteFeesDiscount = (req, res) => {
-
-    FeesDiscountModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Discount Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

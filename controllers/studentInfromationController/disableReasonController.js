@@ -1,26 +1,10 @@
-import DisableReason from '../../models/studentInformationmodels/disableReasonModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { disableReasonSchema } from '../../models/studentInformationModels/studentModel.js';
 
-export const getAll = (req, res) => {
-    DisableReason.getAll((err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-};
+const ctrl = crudFactory(disableReasonSchema, 'DisableReason');
 
-export const create = (req, res) => {
-    DisableReason.create(req.body, (err, result) => {
-        if (err) throw err;
-        res.json({
-            message: 'Reason Added'
-        });
-    });
-};
-
-export const deleteRecord = (req, res) => {
-    DisableReason.delete(req.params.id, (err, result) => {
-        if (err) throw err;
-        res.json({
-            message: 'Reason Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

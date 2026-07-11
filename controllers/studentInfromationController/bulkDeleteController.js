@@ -1,30 +1,15 @@
-import { getCentralPool } from '../../config/database.js';
+import { studentSchema } from '../../models/studentInformationModels/studentModel.js';
 
-export const bulkDeleteStudents = async (req, res) => {
-
-    try {
-        const ids = req.body.ids;
-
-        if (!ids || ids.length === 0) {
-            return res.json({
-                message: 'No IDs Provided'
-            });
-        }
-
-        const sql = `DELETE FROM students WHERE id IN (?)`;
-        const centralPool = getCentralPool();
-        const connection = await centralPool.getConnection();
-        const [result] = await connection.query(sql, [ids]);
-        connection.release();
-
-        res.json({
-            message: 'Students Deleted',
-            result
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error deleting students',
-            error: error.message
-        });
+export const bulkDelete = async (req, res) => {
+  try {
+    const { ids } = req.body;
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ success: false, message: 'ids array is required' });
     }
+    const db = req.tenant.db;
+    let Student;
+    try { Student = db.model('Student'); } catch { Student = db.model('Student', studentSchema); }
+    const result = await Student.deleteMany({ _id: { $in: ids } });
+    res.json({ success: true, message: `${result.deletedCount} students deleted` });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };

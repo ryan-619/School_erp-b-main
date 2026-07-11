@@ -1,82 +1,10 @@
-import CollectFeesModel from '../../models/paymentModels/collectFeesModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { collectFeesSchema } from '../../models/paymentModels/feesModel.js';
 
-export const getAllCollectFees = (req, res) => {
+const ctrl = crudFactory(collectFeesSchema, 'CollectFees');
 
-    CollectFeesModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const getCollectFeesById = (req, res) => {
-
-    CollectFeesModel.getById(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-
-    });
-
-};
-
-export const createCollectFees = (req, res) => {
-
-    CollectFeesModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Collected Successfully',
-            result
-        });
-
-    });
-
-};
-
-export const updateCollectFees = (req, res) => {
-
-    CollectFeesModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Collect Fees Updated'
-            });
-
-        }
-    );
-
-};
-
-export const deleteCollectFees = (req, res) => {
-
-    CollectFeesModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Collect Fees Deleted'
-        });
-
-    });
-
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

@@ -1,187 +1,28 @@
-import UserModel from "../../models/settingModels/userModel.js";
+import { crudFactory } from '../../utils/crudFactory.js';
+import { userSchema } from '../../models/settingModels/settingModel.js';
 
+const ctrl = crudFactory(userSchema, 'TenantUser');
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;
 
-export const getUsers = (
-    req,
-    res
-) => {
+const getModel = (db) => { try { return db.model('TenantUser'); } catch { return db.model('TenantUser', userSchema); } };
 
-    UserModel.getAll(
-        (err, users) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message: "Failed to fetch users",
-                    error: err.message
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                total: users.length,
-                data: users
-            });
-        }
-    );
-
+export const getByType = async (req, res) => {
+  try {
+    const User = getModel(req.tenant.db);
+    const data = await User.find({ user_type: req.params.type });
+    res.json({ success: true, count: data.length, data });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };
 
-
-
-export const getUsersByType = (
-    req,
-    res
-) => {
-
-    const { type } = req.params;
-
-    UserModel.getByType(
-        type,
-        (err, users) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message:
-                        "Failed to fetch users",
-                    error: err.message
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                data: users
-            });
-        }
-    );
-};
-
-
-
-export const createUser = (
-    req,
-    res
-) => {
-
-    UserModel.create(
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message:
-                        "Failed to create user",
-                    error: err.message
-                });
-            }
-
-            res.status(201).json({
-                success: true,
-                message:
-                    "User created successfully",
-                userId:
-                    result.insertId
-            });
-        }
-    );
-};
-
-
-
-export const updateUser = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    UserModel.update(
-        id,
-        req.body,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message:
-                        "Failed to update user",
-                    error: err.message
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message:
-                    "User updated successfully"
-            });
-        }
-    );
-};
-
-
-
-export const updateUserStatus = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    const { status } =
-        req.body;
-
-    UserModel.updateStatus(
-        id,
-        status,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message:
-                        "Failed to update status",
-                    error: err.message
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message:
-                    "User status updated"
-            });
-        }
-    );
-};
-
-
-
-export const deleteUser = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    UserModel.delete(
-        id,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    message:
-                        "Failed to delete user",
-                    error: err.message
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message:
-                    "User deleted successfully"
-            });
-        }
-    );
+export const updateStatus = async (req, res) => {
+  try {
+    const User = getModel(req.tenant.db);
+    const user = await User.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    res.json({ success: true, data: user });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };

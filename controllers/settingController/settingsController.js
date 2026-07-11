@@ -1,92 +1,20 @@
-import SettingsModel from "../../models/settingModels/settingsModel.js";
+import { settingsSchema } from '../../models/settingModels/settingModel.js';
 
+const getModel = (db) => { try { return db.model('Settings'); } catch { return db.model('Settings', settingsSchema); } };
 
-
-export const getSettings = (req, res) => {
-
-    SettingsModel.getSettings(
-        (err, result) => {
-
-            if (err) {
-
-                return res.status(500).json({
-                    success: false,
-                    error: err
-                });
-
-            }
-
-            res.status(200).json({
-                success: true,
-                data: result
-            });
-
-        }
-    );
-
+export const getSettings = async (req, res) => {
+  try {
+    const Settings = getModel(req.tenant.db);
+    let settings = await Settings.findOne();
+    if (!settings) settings = await Settings.create({});
+    res.json({ success: true, data: settings });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };
 
-
-
-
-export const saveSettings = (req, res) => {
-
-    SettingsModel.getSettings(
-        (err, result) => {
-
-            if (err) {
-
-                return res.status(500).json(err);
-
-            }
-
-            if (result.length === 0) {
-
-                SettingsModel.createSettings(
-                    req.body,
-                    (err2) => {
-
-                        if (err2) {
-
-                            return res.status(500).json(err2);
-
-                        }
-
-                        res.status(201).json({
-
-                            success: true,
-                            message: "Settings Created"
-
-                        });
-
-                    }
-                );
-
-            } else {
-
-                SettingsModel.updateSettings(
-                    req.body,
-                    (err2) => {
-
-                        if (err2) {
-
-                            return res.status(500).json(err2);
-
-                        }
-
-                        res.json({
-
-                            success: true,
-                            message: "Settings Updated"
-
-                        });
-
-                    }
-                );
-
-            }
-
-        }
-    );
-
+export const saveSettings = async (req, res) => {
+  try {
+    const Settings = getModel(req.tenant.db);
+    const settings = await Settings.findOneAndUpdate({}, req.body, { new: true, upsert: true });
+    res.json({ success: true, message: 'Settings saved', data: settings });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };

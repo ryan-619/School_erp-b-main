@@ -1,26 +1,10 @@
-import DisabledStudent from '../../models/studentInformationmodels/disabledStudentModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { disabledStudentSchema } from '../../models/studentInformationModels/studentModel.js';
 
-export const getAll = (req, res) => {
-    DisabledStudent.getAll((err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-};
+const ctrl = crudFactory(disabledStudentSchema, 'DisabledStudent');
 
-export const create = (req, res) => {
-    DisabledStudent.create(req.body, (err, result) => {
-        if (err) throw err;
-        res.json({
-            message: 'Student Disabled'
-        });
-    });
-};
-
-export const deleteRecord = (req, res) => {
-    DisabledStudent.delete(req.params.id, (err, result) => {
-        if (err) throw err;
-        res.json({
-            message: 'Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

@@ -1,86 +1,20 @@
-import FrontCmsModel from "../../models/settingModels/frontCmsModel.js";
+import { settingsSchema } from '../../models/settingModels/settingModel.js';
 
+const getModel = (db) => { try { return db.model('Settings'); } catch { return db.model('Settings', settingsSchema); } };
 
-export const getFrontCms = (
-    req,
-    res
-) => {
-
-    FrontCmsModel.get(
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                data: result
-            });
-
-        }
-    );
-
+export const getCmsSettings = async (req, res) => {
+  try {
+    const Settings = getModel(req.tenant.db);
+    let settings = await Settings.findOne();
+    if (!settings) settings = await Settings.create({});
+    res.json({ success: true, data: settings });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };
 
-
-
-export const saveFrontCms = (
-    req,
-    res
-) => {
-
-    FrontCmsModel.get(
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            if (
-                result.length === 0
-            ) {
-
-                FrontCmsModel.create(
-                    req.body,
-                    (err) => {
-
-                        if (err) {
-                            return res.status(500).json(err);
-                        }
-
-                        res.status(201).json({
-                            success: true,
-                            message: "Front CMS created"
-                        });
-
-                    }
-                );
-
-            } else {
-
-                FrontCmsModel.update(
-                    req.body,
-                    (err) => {
-
-                        if (err) {
-                            return res.status(500).json(err);
-                        }
-
-                        res.json({
-                            success: true,
-                            message: "Front CMS updated"
-                        });
-
-                    }
-                );
-
-            }
-
-        }
-    );
-
+export const saveCmsSettings = async (req, res) => {
+  try {
+    const Settings = getModel(req.tenant.db);
+    const settings = await Settings.findOneAndUpdate({}, req.body, { new: true, upsert: true });
+    res.json({ success: true, message: 'CMS settings saved', data: settings });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };

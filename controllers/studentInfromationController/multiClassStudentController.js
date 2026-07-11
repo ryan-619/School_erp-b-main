@@ -1,26 +1,10 @@
-import MultiClassStudent from '../../models/studentInformationmodels/multiClassStudentModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { multiClassStudentSchema } from '../../models/studentInformationModels/studentModel.js';
 
-export const getAll = (req, res) => {
-    MultiClassStudent.getAll((err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-};
+const ctrl = crudFactory(multiClassStudentSchema, 'MultiClassStudent');
 
-export const create = (req, res) => {
-    MultiClassStudent.create(req.body, (err, result) => {
-        if (err) throw err;
-        res.json({
-            message: 'Assigned Successfully'
-        });
-    });
-};
-
-export const deleteRecord = (req, res) => {
-    MultiClassStudent.delete(req.params.id, (err, result) => {
-        if (err) throw err;
-        res.json({
-            message: 'Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

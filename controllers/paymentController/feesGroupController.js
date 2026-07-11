@@ -1,59 +1,10 @@
-import FeesGroupModel from '../../models/paymentModels/feesGroupModel.js';
+import { crudFactory } from '../../utils/crudFactory.js';
+import { feesGroupSchema } from '../../models/paymentModels/feesModel.js';
 
-export const getAllFeesGroup = (req, res) => {
+const ctrl = crudFactory(feesGroupSchema, 'FeesGroup');
 
-    FeesGroupModel.getAll((err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json(result);
-    });
-};
-
-export const createFeesGroup = (req, res) => {
-
-    FeesGroupModel.create(req.body, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Group Created'
-        });
-    });
-};
-
-export const updateFeesGroup = (req, res) => {
-
-    FeesGroupModel.update(
-        req.params.id,
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            res.json({
-                message: 'Fees Group Updated'
-            });
-        }
-    );
-};
-
-export const deleteFeesGroup = (req, res) => {
-
-    FeesGroupModel.delete(req.params.id, (err, result) => {
-
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.json({
-            message: 'Fees Group Deleted'
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;

@@ -1,150 +1,21 @@
-import SmsModel from "../../models/settingModels/smsModel.js";
+import { crudFactory } from '../../utils/crudFactory.js';
+import { smsSettingsSchema } from '../../models/settingModels/settingModel.js';
 
+const ctrl = crudFactory(smsSettingsSchema, 'SmsSettings');
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;
 
-export const getSms = (
-    req,
-    res
-) => {
-
-    SmsModel.getAll(
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                data: result
-            });
-
-        }
-    );
-
-};
-
-
-
-export const createSms = (
-    req,
-    res
-) => {
-
-    SmsModel.create(
-        req.body,
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err
-                });
-            }
-
-            res.status(201).json({
-                success: true,
-                message: "Gateway Added",
-                id: result.insertId
-            });
-
-        }
-    );
-
-};
-
-
-
-export const updateSms = (
-    req,
-    res
-) => {
-
-    const { id } = req.params;
-
-    SmsModel.update(
-        id,
-        req.body,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err
-                });
-            }
-
-            res.json({
-                success: true,
-                message: "Gateway Updated"
-            });
-
-        }
-    );
-
-};
-
-
-
-export const deleteSms = (
-    req,
-    res
-) => {
-
-    SmsModel.delete(
-        req.params.id,
-        (err) => {
-
-            if (err) {
-                return res.status(500).json({
-                    success: false,
-                    error: err
-                });
-            }
-
-            res.json({
-                success: true,
-                message: "Gateway Deleted"
-            });
-
-        }
-    );
-
-};
-
-
-
-export const activateSms = (
-    req,
-    res
-) => {
-
-    SmsModel.disableAll(
-        (err) => {
-
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            SmsModel.activate(
-                req.params.id,
-                (err) => {
-
-                    if (err) {
-                        return res.status(500).json(err);
-                    }
-
-                    res.json({
-                        success: true,
-                        message: "Gateway Activated"
-                    });
-
-                }
-            );
-
-        }
-    );
-
+export const activateSms = async (req, res) => {
+  try {
+    const db = req.tenant.db;
+    let SmsSettings;
+    try { SmsSettings = db.model('SmsSettings'); } catch { SmsSettings = db.model('SmsSettings', smsSettingsSchema); }
+    await SmsSettings.updateMany({}, { status: 'Inactive' });
+    const sms = await SmsSettings.findByIdAndUpdate(req.params.id, { status: 'Active' }, { new: true });
+    if (!sms) return res.status(404).json({ success: false, message: 'SMS setting not found' });
+    res.json({ success: true, message: 'SMS gateway activated', data: sms });
+  } catch (err) { res.status(500).json({ success: false, message: err.message }); }
 };

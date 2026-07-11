@@ -1,53 +1,10 @@
-import FileTypeModel from "../../models/settingModels/fileTypeModel.js";
+import { crudFactory } from '../../utils/crudFactory.js';
+import { fileTypeSchema } from '../../models/settingModels/settingModel.js';
 
-export const getFileSettings = (req, res) => {
-    FileTypeModel.getSettings((err, result) => {
-        if (err) {
-            return res.status(500).json({
-                success: false,
-                message: "Failed to fetch settings",
-                error: err.message
-            });
-        }
+const ctrl = crudFactory(fileTypeSchema, 'FileType');
 
-        res.status(200).json({
-            success: true,
-            data: result[0]
-        });
-    });
-};
-
-export const createFileSettings = (req, res) => {
-    FileTypeModel.create(req.body, (err, result) => {
-        if (err) {
-            return res.status(500).json({
-                success: false,
-                message: "Create failed",
-                error: err.message
-            });
-        }
-
-        res.status(201).json({
-            success: true,
-            message: "Settings created",
-            insertId: result.insertId
-        });
-    });
-};
-
-export const updateFileSettings = (req, res) => {
-    FileTypeModel.updateSettings(req.body, (err) => {
-        if (err) {
-            return res.status(500).json({
-                success: false,
-                message: "Update failed",
-                error: err.message
-            });
-        }
-
-        res.status(200).json({
-            success: true,
-            message: "Settings updated"
-        });
-    });
-};
+export const getAll  = ctrl.getAll;
+export const getById = ctrl.getById;
+export const create  = ctrl.create;
+export const update  = ctrl.update;
+export const remove  = ctrl.delete;
