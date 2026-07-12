@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllAdmitCard,
-    createAdmitCard,
-    updateAdmitCard,
-    deleteAdmitCard
-} from '../../controllers/examinationController/designAdmitCardController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/examinationController/designAdmitCardController.js';
 
 const router = express.Router();
 
-router.get('/', getAllAdmitCard);
-
-router.post('/', createAdmitCard);
-
-router.put('/:id', updateAdmitCard);
-
-router.delete('/:id', deleteAdmitCard);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

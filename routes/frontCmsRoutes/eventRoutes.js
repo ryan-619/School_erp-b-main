@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllEvents,
-    getEventById,
-    createEvent,
-    updateEvent,
-    deleteEvent
-} from '../../controllers/frontCmsController/eventController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/frontCmsController/eventController.js';
 
 const router = express.Router();
 
-router.get('/', getAllEvents);
-
-router.get('/:id', getEventById);
-
-router.post('/', createEvent);
-
-router.put('/:id', updateEvent);
-
-router.delete('/:id', deleteEvent);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,24 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/departmentController.js';
 
-import {
-getAllDepartment,
-getDepartmentById,
-createDepartment,
-updateDepartment,
-deleteDepartment
-}
-from '../../controllers/hrController/departmentController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllDepartment);
-
-router.get('/:id',getDepartmentById);
-
-router.post('/',createDepartment);
-
-router.put('/:id',updateDepartment);
-
-router.delete('/:id',deleteDepartment);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

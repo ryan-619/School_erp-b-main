@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/payrollController.js';
 
-import{
-getPayroll,
-createPayroll,
-updatePayroll,
-deletePayroll
-}
-from '../../controllers/hrController/payrollController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getPayroll);
-
-router.post('/',createPayroll);
-
-router.put('/:id',updatePayroll);
-
-router.delete('/:id',deletePayroll);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

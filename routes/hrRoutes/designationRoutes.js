@@ -1,24 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/designationController.js';
 
-import {
-getAllDesignation,
-getDesignationById,
-createDesignation,
-updateDesignation,
-deleteDesignation
-}
-from '../../controllers/hrController/designationController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllDesignation);
-
-router.get('/:id',getDesignationById);
-
-router.post('/',createDesignation);
-
-router.put('/:id',updateDesignation);
-
-router.delete('/:id',deleteDesignation);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

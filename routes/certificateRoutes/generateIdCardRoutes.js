@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllGenerateIdCards,
-    getGenerateIdCardById,
-    createGenerateIdCard,
-    updateGenerateIdCard,
-    deleteGenerateIdCard
-} from '../../controllers/certificateController/generateIdCardController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/certificateController/generateIdCardController.js';
 
 const router = express.Router();
 
-router.get('/', getAllGenerateIdCards);
-
-router.get('/:id', getGenerateIdCardById);
-
-router.post('/', createGenerateIdCard);
-
-router.put('/:id', updateGenerateIdCard);
-
-router.delete('/:id', deleteGenerateIdCard);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

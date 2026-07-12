@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/leaveTypeController.js';
 
-import{
-getAllLeaveType,
-createLeaveType,
-updateLeaveType,
-deleteLeaveType
-}
-from '../../controllers/hrController/leaveTypeController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllLeaveType);
-
-router.post('/',createLeaveType);
-
-router.put('/:id',updateLeaveType);
-
-router.delete('/:id',deleteLeaveType);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

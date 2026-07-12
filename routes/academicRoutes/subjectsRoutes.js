@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllSubjects,
-    createSubject,
-    updateSubject,
-    deleteSubject
-} from '../../controllers/academicsController/subjectsController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/academicsController/subjectsController.js';
 
 const router = express.Router();
 
-router.get('/', getAllSubjects);
-
-router.post('/', createSubject);
-
-router.put('/:id', updateSubject);
-
-router.delete('/:id', deleteSubject);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

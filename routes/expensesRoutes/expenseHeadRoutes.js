@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllExpenseHead,
-    getExpenseHeadById,
-    createExpenseHead,
-    updateExpenseHead,
-    deleteExpenseHead
-} from '../../controllers/expensesController/expenseHeadController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/expensesController/expenseHeadController.js';
 
 const router = express.Router();
 
-router.get('/', getAllExpenseHead);
-
-router.get('/:id', getExpenseHeadById);
-
-router.post('/', createExpenseHead);
-
-router.put('/:id', updateExpenseHead);
-
-router.delete('/:id', deleteExpenseHead);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllItemCategories,
-    getItemCategoryById,
-    createItemCategory,
-    updateItemCategory,
-    deleteItemCategory
-} from '../../controllers/inventoryController/itemCategoryController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/inventoryController/itemCategoryController.js';
 
 const router = express.Router();
 
-router.get('/', getAllItemCategories);
-
-router.get('/:id', getItemCategoryById);
-
-router.post('/', createItemCategory);
-
-router.put('/:id', updateItemCategory);
-
-router.delete('/:id', deleteItemCategory);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

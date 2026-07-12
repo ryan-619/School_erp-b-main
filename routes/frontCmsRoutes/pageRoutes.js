@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllPages,
-    getPageById,
-    createPage,
-    updatePage,
-    deletePage
-} from '../../controllers/frontCmsController/pageController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/frontCmsController/pageController.js';
 
 const router = express.Router();
 
-router.get('/', getAllPages);
-
-router.get('/:id', getPageById);
-
-router.post('/', createPage);
-
-router.put('/:id', updatePage);
-
-router.delete('/:id', deletePage);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

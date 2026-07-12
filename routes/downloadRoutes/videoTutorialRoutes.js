@@ -1,42 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/downloadController/videoTutorialController.js';
 
-import {
+const router = express.Router();
 
-getAllVideo,
-getVideoById,
-createVideo,
-updateVideo,
-deleteVideo
-
-}
-from '../../controllers/downloadController/videoTutorialController.js';
-
-
-const router=express.Router();
-
-router.get(
-'/',
-getAllVideo
-);
-
-router.get(
-'/:id',
-getVideoById
-);
-
-router.post(
-'/',
-createVideo
-);
-
-router.put(
-'/:id',
-updateVideo
-);
-
-router.delete(
-'/:id',
-deleteVideo
-);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

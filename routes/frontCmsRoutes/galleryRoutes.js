@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllGallery,
-    getGalleryById,
-    createGallery,
-    updateGallery,
-    deleteGallery
-} from '../../controllers/frontCmsController/galleryController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/frontCmsController/galleryController.js';
 
 const router = express.Router();
 
-router.get('/', getAllGallery);
-
-router.get('/:id', getGalleryById);
-
-router.post('/', createGallery);
-
-router.put('/:id', updateGallery);
-
-router.delete('/:id', deleteGallery);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

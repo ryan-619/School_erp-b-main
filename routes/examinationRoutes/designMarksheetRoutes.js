@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllMarksheetDesign,
-    createMarksheetDesign,
-    updateMarksheetDesign,
-    deleteMarksheetDesign
-} from '../../controllers/examinationController/designMarksheetController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/examinationController/designMarksheetController.js';
 
 const router = express.Router();
 
-router.get('/', getAllMarksheetDesign);
-
-router.post('/', createMarksheetDesign);
-
-router.put('/:id', updateMarksheetDesign);
-
-router.delete('/:id', deleteMarksheetDesign);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllExamGroup,
-    createExamGroup,
-    updateExamGroup,
-    deleteExamGroup
-} from '../../controllers/examinationController/examGroupController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/examinationController/examGroupController.js';
 
 const router = express.Router();
 
-router.get('/', getAllExamGroup);
-
-router.post('/', createExamGroup);
-
-router.put('/:id', updateExamGroup);
-
-router.delete('/:id', deleteExamGroup);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

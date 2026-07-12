@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllStaffIdCards,
-    getStaffIdCardById,
-    createStaffIdCard,
-    updateStaffIdCard,
-    deleteStaffIdCard
-} from '../../controllers/certificateController/staffIdCardController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/certificateController/staffIdCardController.js';
 
 const router = express.Router();
 
-router.get('/', getAllStaffIdCards);
-
-router.get('/:id', getStaffIdCardById);
-
-router.post('/', createStaffIdCard);
-
-router.put('/:id', updateStaffIdCard);
-
-router.delete('/:id', deleteStaffIdCard);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

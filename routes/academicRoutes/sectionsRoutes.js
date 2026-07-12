@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllSections,
-    createSection,
-    updateSection,
-    deleteSection
-} from '../../controllers/academicsController/sectionsController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/academicsController/sectionsController.js';
 
 const router = express.Router();
 
-router.get('/', getAllSections);
-
-router.post('/', createSection);
-
-router.put('/:id', updateSection);
-
-router.delete('/:id', deleteSection);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllManageAlumni,
-    getManageAlumniById,
-    createManageAlumni,
-    updateManageAlumni,
-    deleteManageAlumni
-} from '../../controllers/alumniController/manageAlumniController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/alumniController/manageAlumniController.js';
 
 const router = express.Router();
 
-router.get('/', getAllManageAlumni);
-
-router.get('/:id', getManageAlumniById);
-
-router.post('/', createManageAlumni);
-
-router.put('/:id', updateManageAlumni);
-
-router.delete('/:id', deleteManageAlumni);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

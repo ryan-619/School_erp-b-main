@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllBannerImages,
-    getBannerImageById,
-    createBannerImage,
-    updateBannerImage,
-    deleteBannerImage
-} from '../../controllers/frontCmsController/bannerImageController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/frontCmsController/bannerImageController.js';
 
 const router = express.Router();
 
-router.get('/', getAllBannerImages);
-
-router.get('/:id', getBannerImageById);
-
-router.post('/', createBannerImage);
-
-router.put('/:id', updateBannerImage);
-
-router.delete('/:id', deleteBannerImage);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

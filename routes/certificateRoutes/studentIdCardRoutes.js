@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllStudentIdCards,
-    getStudentIdCardById,
-    createStudentIdCard,
-    updateStudentIdCard,
-    deleteStudentIdCard
-} from '../../controllers/certificateController/studentIdCardController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/certificateController/studentIdCardController.js';
 
 const router = express.Router();
 
-router.get('/', getAllStudentIdCards);
-
-router.get('/:id', getStudentIdCardById);
-
-router.post('/', createStudentIdCard);
-
-router.put('/:id', updateStudentIdCard);
-
-router.delete('/:id', deleteStudentIdCard);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

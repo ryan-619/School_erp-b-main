@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllDailyAssignments,
-    getDailyAssignmentById,
-    createDailyAssignment,
-    updateDailyAssignment,
-    deleteDailyAssignment
-} from '../../controllers/homeworkController/dailyAssignmentController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/homeworkController/dailyAssignmentController.js';
 
 const router = express.Router();
 
-router.get('/', getAllDailyAssignments);
-
-router.get('/:id', getDailyAssignmentById);
-
-router.post('/', createDailyAssignment);
-
-router.put('/:id', updateDailyAssignment);
-
-router.delete('/:id', deleteDailyAssignment);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

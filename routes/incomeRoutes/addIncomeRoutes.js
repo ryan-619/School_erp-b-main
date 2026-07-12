@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllIncome,
-    getIncomeById,
-    createIncome,
-    updateIncome,
-    deleteIncome
-} from '../../controllers/incomeController/addIncomeController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/incomeController/addIncomeController.js';
 
 const router = express.Router();
 
-router.get('/', getAllIncome);
-
-router.get('/:id', getIncomeById);
-
-router.post('/', createIncome);
-
-router.put('/:id', updateIncome);
-
-router.delete('/:id', deleteIncome);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

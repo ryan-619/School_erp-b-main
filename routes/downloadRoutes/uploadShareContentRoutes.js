@@ -1,45 +1,13 @@
 import express from 'express';
-
-import upload
-from '../../middleware/contentUpload.js';
-
-import {
-
-    getAllUploadContent,
-    getUploadContentById,
-    createUploadContent,
-    deleteUploadContent
-
-}
-from '../../controllers/downloadController/uploadShareContentController.js';
-
+import { upload } from '../../middleware/contentUpload.js';
+import { getAll, getById, create, update, remove } from '../../controllers/downloadController/uploadShareContentController.js';
 
 const router = express.Router();
 
-
-router.get(
-    '/',
-    getAllUploadContent
-);
-
-
-router.get(
-    '/:id',
-    getUploadContentById
-);
-
-
-router.post(
-    '/',
-    upload.single('file'),
-    createUploadContent
-);
-
-
-router.delete(
-    '/:id',
-    deleteUploadContent
-);
-
+router.get('/',       getAll);
+router.get('/:id',    getById);
+router.post('/',      upload.single('file'), create);
+router.put('/:id',    update);
+router.delete('/:id', remove);
 
 export default router;

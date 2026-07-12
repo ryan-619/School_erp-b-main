@@ -1,46 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/downloadController/contentTypeController.js';
 
-import{
+const router = express.Router();
 
-getAllContentType,
-getContentTypeById,
-createContentType,
-updateContentType,
-deleteContentType
-
-}
-from '../../controllers/downloadController/contentTypeController.js';
-
-const router=express.Router();
-
-
-router.get(
-'/',
-getAllContentType
-);
-
-
-router.get(
-'/:id',
-getContentTypeById
-);
-
-
-router.post(
-'/',
-createContentType
-);
-
-
-router.put(
-'/:id',
-updateContentType
-);
-
-
-router.delete(
-'/:id',
-deleteContentType
-);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

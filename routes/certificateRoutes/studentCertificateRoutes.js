@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllStudentCertificates,
-    getStudentCertificateById,
-    createStudentCertificate,
-    updateStudentCertificate,
-    deleteStudentCertificate
-} from '../../controllers/certificateController/studentCertificateController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/certificateController/studentCertificateController.js';
 
 const router = express.Router();
 
-router.get('/', getAllStudentCertificates);
-
-router.get('/:id', getStudentCertificateById);
-
-router.post('/', createStudentCertificate);
-
-router.put('/:id', updateStudentCertificate);
-
-router.delete('/:id', deleteStudentCertificate);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

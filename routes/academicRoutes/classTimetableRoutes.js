@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllTimetable,
-    getTimetableById,
-    createTimetable,
-    updateTimetable,
-    deleteTimetable
-} from '../../controllers/academicsController/classTimetableController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/academicsController/classTimetableController.js';
 
 const router = express.Router();
 
-router.get('/', getAllTimetable);
-
-router.get('/:id', getTimetableById);
-
-router.post('/', createTimetable);
-
-router.put('/:id', updateTimetable);
-
-router.delete('/:id', deleteTimetable);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

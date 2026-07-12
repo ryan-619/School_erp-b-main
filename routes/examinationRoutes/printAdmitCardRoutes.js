@@ -1,11 +1,7 @@
 import express from 'express';
-
-import {
-    getStudentAdmitCard
-} from '../../controllers/examinationController/printAdmitCardController.js';
+import { printAdmitCard } from '../../controllers/examinationController/printAdmitCardController.js';
 
 const router = express.Router();
-
-router.get('/:studentId', getStudentAdmitCard);
+router.get('/:studentId', printAdmitCard);
 
 export default router;

@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllMediaManagers,
-    getMediaManagerById,
-    createMediaManager,
-    updateMediaManager,
-    deleteMediaManager
-} from '../../controllers/frontCmsController/mediaManagerController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/frontCmsController/mediaManagerController.js';
 
 const router = express.Router();
 
-router.get('/', getAllMediaManagers);
-
-router.get('/:id', getMediaManagerById);
-
-router.post('/', createMediaManager);
-
-router.put('/:id', updateMediaManager);
-
-router.delete('/:id', deleteMediaManager);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllMarksGrade,
-    createMarksGrade,
-    updateMarksGrade,
-    deleteMarksGrade
-} from '../../controllers/examinationController/marksGradeController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/examinationController/marksGradeController.js';
 
 const router = express.Router();
 
-router.get('/', getAllMarksGrade);
-
-router.post('/', createMarksGrade);
-
-router.put('/:id', updateMarksGrade);
-
-router.delete('/:id', deleteMarksGrade);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

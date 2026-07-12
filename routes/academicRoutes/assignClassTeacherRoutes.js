@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllAssignTeacher,
-    createAssignTeacher,
-    updateAssignTeacher,
-    deleteAssignTeacher
-} from '../../controllers/academicsController/assignClassTeacherController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/academicsController/assignClassTeacherController.js';
 
 const router = express.Router();
 
-router.get('/', getAllAssignTeacher);
-
-router.post('/', createAssignTeacher);
-
-router.put('/:id', updateAssignTeacher);
-
-router.delete('/:id', deleteAssignTeacher);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

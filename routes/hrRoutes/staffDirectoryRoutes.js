@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/staffDirectoryController.js';
 
-import{
-getAllStaff,
-createStaff,
-updateStaff,
-deleteStaff
-}
-from '../../controllers/hrController/staffDirectoryController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllStaff);
-
-router.post('/',createStaff);
-
-router.put('/:id',updateStaff);
-
-router.delete('/:id',deleteStaff);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

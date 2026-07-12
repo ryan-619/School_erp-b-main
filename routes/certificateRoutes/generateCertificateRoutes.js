@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllGenerateCertificates,
-    getGenerateCertificateById,
-    createGenerateCertificate,
-    updateGenerateCertificate,
-    deleteGenerateCertificate
-} from '../../controllers/certificateController/generateCertificateController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/certificateController/generateCertificateController.js';
 
 const router = express.Router();
 
-router.get('/', getAllGenerateCertificates);
-
-router.get('/:id', getGenerateCertificateById);
-
-router.post('/', createGenerateCertificate);
-
-router.put('/:id', updateGenerateCertificate);
-
-router.delete('/:id', deleteGenerateCertificate);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

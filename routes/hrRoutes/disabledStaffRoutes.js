@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/disabledStaffController.js';
 
-import {
-getAllDisabledStaff,
-getDisabledStaffById,
-createDisabledStaff,
-deleteDisabledStaff
-}
-from '../../controllers/hrController/disabledStaffController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllDisabledStaff);
-
-router.get('/:id',getDisabledStaffById);
-
-router.post('/',createDisabledStaff);
-
-router.delete('/:id',deleteDisabledStaff);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

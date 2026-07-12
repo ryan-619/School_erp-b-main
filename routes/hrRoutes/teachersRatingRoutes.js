@@ -1,24 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/teachersRatingController.js';
 
-import {
-getAllTeachersRating,
-getTeachersRatingById,
-createTeachersRating,
-updateTeachersRating,
-deleteTeachersRating
-}
-from '../../controllers/hrController/teachersRatingController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllTeachersRating);
-
-router.get('/:id',getTeachersRatingById);
-
-router.post('/',createTeachersRating);
-
-router.put('/:id',updateTeachersRating);
-
-router.delete('/:id',deleteTeachersRating);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

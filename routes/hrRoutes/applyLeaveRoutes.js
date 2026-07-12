@@ -1,18 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/applyLeaveController.js';
 
-import{
-getAllApplyLeave,
-createApplyLeave,
-deleteApplyLeave
-}
-from '../../controllers/hrController/applyLeaveController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllApplyLeave);
-
-router.post('/',createApplyLeave);
-
-router.delete('/:id',deleteApplyLeave);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

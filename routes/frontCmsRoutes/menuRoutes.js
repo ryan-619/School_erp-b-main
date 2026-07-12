@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllMenus,
-    getMenuById,
-    createMenu,
-    updateMenu,
-    deleteMenu
-} from '../../controllers/frontCmsController/menuController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/frontCmsController/menuController.js';
 
 const router = express.Router();
 
-router.get('/', getAllMenus);
-
-router.get('/:id', getMenuById);
-
-router.post('/', createMenu);
-
-router.put('/:id', updateMenu);
-
-router.delete('/:id', deleteMenu);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

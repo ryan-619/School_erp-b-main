@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllExamSchedule,
-    createExamSchedule,
-    updateExamSchedule,
-    deleteExamSchedule
-} from '../../controllers/examinationController/examScheduleController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/examinationController/examScheduleController.js';
 
 const router = express.Router();
 
-router.get('/', getAllExamSchedule);
-
-router.post('/', createExamSchedule);
-
-router.put('/:id', updateExamSchedule);
-
-router.delete('/:id', deleteExamSchedule);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,11 +1,7 @@
 import express from 'express';
-
-import {
-    getStudentMarksheet
-} from '../../controllers/examinationController/printMarksheetController.js';
+import { printMarksheet } from '../../controllers/examinationController/printMarksheetController.js';
 
 const router = express.Router();
-
-router.get('/:studentId', getStudentMarksheet);
+router.get('/:studentId', printMarksheet);
 
 export default router;

@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/hrController/staffAttendanceController.js';
 
-import{
-getAttendance,
-createAttendance,
-updateAttendance,
-deleteAttendance
-}
-from '../../controllers/hrController/staffAttendanceController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAttendance);
-
-router.post('/',createAttendance);
-
-router.put('/:id',updateAttendance);
-
-router.delete('/:id',deleteAttendance);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllLeaves,
-    getLeaveById,
-    createLeave,
-    updateLeave,
-    deleteLeave
-} from '../../controllers/attendanceController/approveLeaveController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/attendanceController/approveLeaveController.js';
 
 const router = express.Router();
 
-router.get('/', getAllLeaves);
-
-router.get('/:id', getLeaveById);
-
-router.post('/', createLeave);
-
-router.put('/:id', updateLeave);
-
-router.delete('/:id', deleteLeave);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;
