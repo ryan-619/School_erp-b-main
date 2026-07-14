@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllComplaint,
-    createComplaint,
-    updateComplaint,
-    deleteComplaint
-} from '../../controllers/officeController/complaintController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/officeController/complaintController.js';
 
 const router = express.Router();
 
-router.get('/', getAllComplaint);
-
-router.post('/', createComplaint);
-
-router.put('/:id', updateComplaint);
-
-router.delete('/:id', deleteComplaint);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

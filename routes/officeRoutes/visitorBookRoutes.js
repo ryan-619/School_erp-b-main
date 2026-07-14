@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllVisitors,
-    createVisitor,
-    updateVisitor,
-    deleteVisitor
-} from '../../controllers/officeController/visitorBookController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/officeController/visitorBookController.js';
 
 const router = express.Router();
 
-router.get('/', getAllVisitors);
-
-router.post('/', createVisitor);
-
-router.put('/:id', updateVisitor);
-
-router.delete('/:id', deleteVisitor);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllFeesDiscount,
-    createFeesDiscount,
-    updateFeesDiscount,
-    deleteFeesDiscount
-} from '../../controllers/paymentController/feesDiscountController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/feesDiscountController.js';
 
 const router = express.Router();
 
-router.get('/', getAllFeesDiscount);
-
-router.post('/', createFeesDiscount);
-
-router.put('/:id', updateFeesDiscount);
-
-router.delete('/:id', deleteFeesDiscount);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

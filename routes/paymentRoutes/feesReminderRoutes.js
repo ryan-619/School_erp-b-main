@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllReminder,
-    createReminder,
-    updateReminder,
-    deleteReminder
-} from '../../controllers/paymentController/feesReminderController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/feesReminderController.js';
 
 const router = express.Router();
 
-router.get('/', getAllReminder);
-
-router.post('/', createReminder);
-
-router.put('/:id', updateReminder);
-
-router.delete('/:id', deleteReminder);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

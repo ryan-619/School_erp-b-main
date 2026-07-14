@@ -1,11 +1,7 @@
 import express from 'express';
-
-import {
-    getAllDueFees
-} from '../../controllers/paymentController/searchDueFeesController.js';
+import { searchDueFees } from '../../controllers/paymentController/searchDueFeesController.js';
 
 const router = express.Router();
-
-router.get('/', getAllDueFees);
+router.get('/', searchDueFees);
 
 export default router;

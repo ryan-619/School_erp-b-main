@@ -1,40 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/onlineExamController/questionBankController.js';
 
-import {
+const router = express.Router();
 
-getAllQuestions,
-getQuestionById,
-createQuestion,
-updateQuestion,
-deleteQuestion
-
-} from '../../controllers/onlineExamController/questionBankController.js';
-
-const router=express.Router();
-
-router.get(
-    '/',
-    getAllQuestions
-);
-
-router.get(
-    '/:id',
-    getQuestionById
-);
-
-router.post(
-    '/',
-    createQuestion
-);
-
-router.put(
-    '/:id',
-    updateQuestion
-);
-
-router.delete(
-    '/:id',
-    deleteQuestion
-);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

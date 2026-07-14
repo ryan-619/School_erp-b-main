@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllTransportFeesMaster,
-    getTransportFeesMasterById,
-    createTransportFeesMaster,
-    updateTransportFeesMaster,
-    deleteTransportFeesMaster
-} from '../../controllers/transportController/transportFeesMasterController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/transportController/transportFeesMasterController.js';
 
 const router = express.Router();
 
-router.get('/', getAllTransportFeesMaster);
-
-router.get('/:id', getTransportFeesMasterById);
-
-router.post('/', createTransportFeesMaster);
-
-router.put('/:id', updateTransportFeesMaster);
-
-router.delete('/:id', deleteTransportFeesMaster);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

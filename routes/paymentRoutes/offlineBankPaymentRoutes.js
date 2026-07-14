@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllOfflinePayments,
-    createOfflinePayment,
-    updateOfflinePayment,
-    deleteOfflinePayment
-} from '../../controllers/paymentController/offlineBankPaymentController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/offlineBankPaymentController.js';
 
 const router = express.Router();
 
-router.get('/', getAllOfflinePayments);
-
-router.post('/', createOfflinePayment);
-
-router.put('/:id', updateOfflinePayment);
-
-router.delete('/:id', deleteOfflinePayment);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

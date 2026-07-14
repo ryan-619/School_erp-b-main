@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllCallLogs,
-    createCallLog,
-    updateCallLog,
-    deleteCallLog
-} from '../../controllers/officeController/phoneCallLogController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/officeController/phoneCallLogController.js';
 
 const router = express.Router();
 
-router.get('/', getAllCallLogs);
-
-router.post('/', createCallLog);
-
-router.put('/:id', updateCallLog);
-
-router.delete('/:id', deleteCallLog);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

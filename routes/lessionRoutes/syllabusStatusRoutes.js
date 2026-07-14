@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/lessionController/syllabusStatusController.js';
 
-import{
-getAllStatus,
-createStatus,
-updateStatus,
-deleteStatus
-}
-from '../../controllers/lessionController/syllabusStatusController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllStatus);
-
-router.post('/',createStatus);
-
-router.put('/:id',updateStatus);
-
-router.delete('/:id',deleteStatus);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

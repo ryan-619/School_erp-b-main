@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllFeesGroup,
-    createFeesGroup,
-    updateFeesGroup,
-    deleteFeesGroup
-} from '../../controllers/paymentController/feesGroupController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/feesGroupController.js';
 
 const router = express.Router();
 
-router.get('/', getAllFeesGroup);
-
-router.post('/', createFeesGroup);
-
-router.put('/:id', updateFeesGroup);
-
-router.delete('/:id', deleteFeesGroup);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

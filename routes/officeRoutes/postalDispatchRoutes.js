@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllDispatch,
-    createDispatch,
-    updateDispatch,
-    deleteDispatch
-} from '../../controllers/officeController/postalDispatchController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/officeController/postalDispatchController.js';
 
 const router = express.Router();
 
-router.get('/', getAllDispatch);
-
-router.post('/', createDispatch);
-
-router.put('/:id', updateDispatch);
-
-router.delete('/:id', deleteDispatch);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

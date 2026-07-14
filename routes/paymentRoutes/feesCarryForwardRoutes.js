@@ -1,17 +1,12 @@
 import express from 'express';
-
-import {
-    getAllCarryForward,
-    createCarryForward,
-    deleteCarryForward
-} from '../../controllers/paymentController/feesCarryForwardController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/feesCarryForwardController.js';
 
 const router = express.Router();
 
-router.get('/', getAllCarryForward);
-
-router.post('/', createCarryForward);
-
-router.delete('/:id', deleteCarryForward);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

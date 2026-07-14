@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllLibraryStudents,
-    getLibraryStudentById,
-    createLibraryStudent,
-    updateLibraryStudent,
-    deleteLibraryStudent
-} from '../../controllers/libraryController/libraryStudentController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/libraryController/libraryStudentController.js';
 
 const router = express.Router();
 
-router.get('/', getAllLibraryStudents);
-
-router.get('/:id', getLibraryStudentById);
-
-router.post('/', createLibraryStudent);
-
-router.put('/:id', updateLibraryStudent);
-
-router.delete('/:id', deleteLibraryStudent);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

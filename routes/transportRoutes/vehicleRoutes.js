@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllVehicles,
-    getVehicleById,
-    createVehicle,
-    updateVehicle,
-    deleteVehicle
-} from '../../controllers/transportController/vehicleController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/transportController/vehicleController.js';
 
 const router = express.Router();
 
-router.get('/', getAllVehicles);
-
-router.get('/:id', getVehicleById);
-
-router.post('/', createVehicle);
-
-router.put('/:id', updateVehicle);
-
-router.delete('/:id', deleteVehicle);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllRoutePickupPoints,
-    getRoutePickupPointById,
-    createRoutePickupPoint,
-    updateRoutePickupPoint,
-    deleteRoutePickupPoint
-} from '../../controllers/transportController/routePickupPointController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/transportController/routePickupPointController.js';
 
 const router = express.Router();
 
-router.get('/', getAllRoutePickupPoints);
-
-router.get('/:id', getRoutePickupPointById);
-
-router.post('/', createRoutePickupPoint);
-
-router.put('/:id', updateRoutePickupPoint);
-
-router.delete('/:id', deleteRoutePickupPoint);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

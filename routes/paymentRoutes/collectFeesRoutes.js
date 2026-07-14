@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllCollectFees,
-    getCollectFeesById,
-    createCollectFees,
-    updateCollectFees,
-    deleteCollectFees
-} from '../../controllers/paymentController/collectFeesController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/collectFeesController.js';
 
 const router = express.Router();
 
-router.get('/', getAllCollectFees);
-
-router.get('/:id', getCollectFeesById);
-
-router.post('/', createCollectFees);
-
-router.put('/:id', updateCollectFees);
-
-router.delete('/:id', deleteCollectFees);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

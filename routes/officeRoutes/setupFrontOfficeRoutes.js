@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllSetup,
-    createSetup,
-    updateSetup,
-    deleteSetup
-} from '../../controllers/officeController/setupFrontOfficeController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/officeController/setupFrontOfficeController.js';
 
 const router = express.Router();
 
-router.get('/', getAllSetup);
-
-router.post('/', createSetup);
-
-router.put('/:id', updateSetup);
-
-router.delete('/:id', deleteSetup);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

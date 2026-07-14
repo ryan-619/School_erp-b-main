@@ -1,23 +1,12 @@
 import express from 'express';
-
-import {
-    getAllFeesMaster,
-    getFeesMasterById,
-    createFeesMaster,
-    updateFeesMaster,
-    deleteFeesMaster
-} from '../../controllers/paymentController/feesMasterController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/paymentController/feesMasterController.js';
 
 const router = express.Router();
 
-router.get('/', getAllFeesMaster);
-
-router.get('/:id', getFeesMasterById);
-
-router.post('/', createFeesMaster);
-
-router.put('/:id', updateFeesMaster);
-
-router.delete('/:id', deleteFeesMaster);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

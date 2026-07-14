@@ -1,20 +1,12 @@
 import express from 'express';
-
-import {
-    getAllReceive,
-    createReceive,
-    updateReceive,
-    deleteReceive
-} from '../../controllers/officeController/postalReceiveController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/officeController/postalReceiveController.js';
 
 const router = express.Router();
 
-router.get('/', getAllReceive);
-
-router.post('/', createReceive);
-
-router.put('/:id', updateReceive);
-
-router.delete('/:id', deleteReceive);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

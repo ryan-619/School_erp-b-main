@@ -1,21 +1,12 @@
 import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/lessionController/lessonController.js';
 
-import{
-getAllLesson,
-createLesson,
-updateLesson,
-deleteLesson
-}
-from '../../controllers/lessionController/lessonController.js';
+const router = express.Router();
 
-const router=express.Router();
-
-router.get('/',getAllLesson);
-
-router.post('/',createLesson);
-
-router.put('/:id',updateLesson);
-
-router.delete('/:id',deleteLesson);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;
