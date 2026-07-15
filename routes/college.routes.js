@@ -1,29 +1,13 @@
 import express from 'express';
-import * as collegeController from '../controllers/college.controller.js';
+import { getAllColleges, getCollegeById, getCollegeByCode, createCollege, updateCollege, deleteCollege } from '../controllers/college.controller.js';
 
 const router = express.Router();
 
-/**
- * College Routes
- * All routes require tenant resolution middleware
- */
-
-// GET all colleges (with filters: status, type, search)
-router.get('/colleges', collegeController.getAllColleges);
-
-// GET college by code
-router.get('/colleges/code/:code', collegeController.getCollegeByCode);
-
-// GET college by ID
-router.get('/colleges/:id', collegeController.getCollegeById);
-
-// POST new college
-router.post('/colleges', collegeController.createCollege);
-
-// PUT update college
-router.put('/colleges/:id', collegeController.updateCollege);
-
-// DELETE college
-router.delete('/colleges/:id', collegeController.deleteCollege);
+router.get('/colleges',           getAllColleges);
+router.get('/colleges/code/:code',getCollegeByCode);
+router.get('/colleges/:id',       getCollegeById);
+router.post('/colleges',          createCollege);
+router.put('/colleges/:id',       updateCollege);
+router.delete('/colleges/:id',    deleteCollege);
 
 export default router;

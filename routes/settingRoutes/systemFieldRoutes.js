@@ -1,23 +1,12 @@
-import express from "express";
-
-import {
-    getSystemFields,
-    getFieldsByType,
-    createSystemField,
-    updateSystemFieldStatus,
-    deleteSystemField
-} from "../../controllers/settingController/systemFieldController.js";
+import express from 'express';
+import { getAll, getByType, getById, create, updateStatus, remove } from '../../controllers/settingController/systemFieldController.js';
 
 const router = express.Router();
-
-router.get("/", getSystemFields);
-
-router.get("/:type", getFieldsByType);
-
-router.post("/", createSystemField);
-
-router.patch("/status/:id", updateSystemFieldStatus);
-
-router.delete("/:id", deleteSystemField);
+router.get('/',              getAll);
+router.get('/type/:type',    getByType);
+router.get('/:id',           getById);
+router.post('/',             create);
+router.patch('/status/:id',  updateStatus);
+router.delete('/:id',        remove);
 
 export default router;

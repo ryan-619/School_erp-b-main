@@ -1,40 +1,12 @@
-import express from "express";
-
-import {
-    getAllSessions,
-    createSession,
-    updateSession,
-    deleteSession,
-    activateSession,
-} from "../../controllers/settingController/sessionController.js";
+import express from 'express';
+import { getAll, getById, create, update, remove, activateSession } from '../../controllers/settingController/sessionController.js';
 
 const router = express.Router();
-
-
-router.get(
-    "/",
-    getAllSessions
-);
-
-router.post(
-    "/",
-    createSession
-);
-
-router.put(
-    "/:id",
-    updateSession
-);
-
-router.delete(
-    "/:id",
-    deleteSession
-);
-
-router.put(
-    "/activate/:id",
-    activateSession
-);
-
+router.get('/',              getAll);
+router.post('/',             create);
+router.put('/activate/:id',  activateSession);
+router.get('/:id',           getById);
+router.put('/:id',           update);
+router.delete('/:id',        remove);
 
 export default router;

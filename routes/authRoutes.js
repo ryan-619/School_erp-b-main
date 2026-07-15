@@ -1,26 +1,11 @@
-// routes/authRoutes.js
-
-import express from "express";
-import {
-  signupSuperAdmin,
-  loginSuperAdmin,
-  logoutSuperAdmin
-} from "../controllers/superAdmin.controller.js";
-import { authMiddleware } from "../middleware/authmiddleware.js";
+import express from 'express';
+import { signup, login, logout } from '../controllers/authController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-/**
- * 📝 Authentication Routes
- */
-
-// ✅ SIGNUP - Create new superadmin account
-router.post("/signup", signupSuperAdmin);
-
-// 🔐 LOGIN - Login with email and password
-router.post("/login", loginSuperAdmin);
-
-// 🚪 LOGOUT - Logout (requires authentication)
-router.post("/logout", authMiddleware, logoutSuperAdmin);
+router.post('/signup', signup);
+router.post('/login',  login);
+router.post('/logout', authMiddleware, logout);
 
 export default router;

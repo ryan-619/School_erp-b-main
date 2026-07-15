@@ -1,22 +1,8 @@
-import express from "express";
-
-import {
-    getFrontCms,
-    saveFrontCms
-} from "../../controllers/settingController/frontCmsController.js";
+import express from 'express';
+import { getCmsSettings, saveCmsSettings } from '../../controllers/settingController/frontCmsController.js';
 
 const router = express.Router();
-
-
-router.get(
-    "/",
-    getFrontCms
-);
-
-router.post(
-    "/",
-    saveFrontCms
-);
-
+router.get('/',  getCmsSettings);
+router.post('/', saveCmsSettings);
 
 export default router;

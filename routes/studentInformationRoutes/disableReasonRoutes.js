@@ -1,12 +1,12 @@
 import express from 'express';
-import * as controller from '../../controllers/studentInfromationController/disableReasonController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/studentInfromationController/disableReasonController.js';
 
 const router = express.Router();
 
-router.get('/', controller.getAll);
-
-router.post('/', controller.create);
-
-router.delete('/:id', controller.deleteRecord);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

@@ -1,40 +1,12 @@
-import express from "express";
-
-import {
-    getNotifications,
-    getNotification,
-    createNotification,
-    updateNotification,
-    deleteNotification
-} from "../../controllers/settingController/notificationController.js";
+import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/settingController/notificationController.js';
 
 const router = express.Router();
 
-
-router.get(
-    "/",
-    getNotifications
-);
-
-router.get(
-    "/:id",
-    getNotification
-);
-
-router.post(
-    "/",
-    createNotification
-);
-
-router.put(
-    "/:id",
-    updateNotification
-);
-
-router.delete(
-    "/:id",
-    deleteNotification
-);
-
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

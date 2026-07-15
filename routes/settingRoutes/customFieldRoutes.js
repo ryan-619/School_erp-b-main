@@ -1,23 +1,12 @@
-import express from "express";
-
-import {
-    getCustomFields,
-    getCustomField,
-    createCustomField,
-    updateCustomField,
-    deleteCustomField
-} from "../../controllers/settingController/customFieldController.js";
+import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/settingController/customFieldController.js';
 
 const router = express.Router();
 
-router.get("/", getCustomFields);
-
-router.get("/:id", getCustomField);
-
-router.post("/", createCustomField);
-
-router.put("/:id", updateCustomField);
-
-router.delete("/:id", deleteCustomField);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

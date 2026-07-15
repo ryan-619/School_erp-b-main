@@ -1,46 +1,13 @@
-import express from "express";
-
-import {
-    getModules,
-    getModulesByType,
-    createModule,
-    updateModule,
-    updateModuleStatus,
-    deleteModule
-} from "../../controllers/settingController/moduleController.js";
+import express from 'express';
+import { getAll, getById, create, update, remove, getByType, updateStatus } from '../../controllers/settingController/moduleController.js';
 
 const router = express.Router();
-
-
-router.get(
-    "/",
-    getModules
-);
-
-router.get(
-    "/type/:type",
-    getModulesByType
-);
-
-router.post(
-    "/",
-    createModule
-);
-
-router.put(
-    "/:id",
-    updateModule
-);
-
-router.patch(
-    "/status/:id",
-    updateModuleStatus
-);
-
-router.delete(
-    "/:id",
-    deleteModule
-);
-
+router.get('/',               getAll);
+router.get('/type/:type',     getByType);
+router.get('/:id',            getById);
+router.post('/',              create);
+router.put('/:id',            update);
+router.delete('/:id',         remove);
+router.patch('/status/:id',   updateStatus);
 
 export default router;

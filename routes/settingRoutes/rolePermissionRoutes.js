@@ -1,45 +1,12 @@
+import express from 'express';
+import { getAll, getById, create, update, remove } from '../../controllers/settingController/rolePermissionController.js';
 
-import express from "express";
+const router = express.Router();
 
-import {
-
-    getRoles,
-    getRole,
-    createRole,
-    updateRole,
-    deleteRole
-
-}
-from "../../controllers/settingController/rolePermissionController.js";
-
-const router =
-express.Router();
-
-
-router.get(
-    "/",
-    getRoles
-);
-
-router.get(
-    "/:id",
-    getRole
-);
-
-router.post(
-    "/",
-    createRole
-);
-
-router.put(
-    "/:id",
-    updateRole
-);
-
-router.delete(
-    "/:id",
-    deleteRole
-);
-
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

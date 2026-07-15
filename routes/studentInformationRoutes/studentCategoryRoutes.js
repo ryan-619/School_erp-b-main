@@ -1,16 +1,12 @@
 import express from 'express';
-import * as controller from '../../controllers/studentInfromationController/studentCategoryController.js';
+import { getAll, getById, create, update, remove } from '../../controllers/studentInfromationController/studentCategoryController.js';
 
 const router = express.Router();
 
-router.get('/', controller.getAll);
-
-router.get('/:id', controller.getById);
-
-router.post('/', controller.create);
-
-router.put('/:id', controller.update);
-
-router.delete('/:id', controller.deleteRecord);
+router.get('/',        getAll);
+router.post('/',       create);
+router.get('/:id',     getById);
+router.put('/:id',     update);
+router.delete('/:id',  remove);
 
 export default router;

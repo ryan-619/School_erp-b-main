@@ -1,17 +1,9 @@
-import express from "express";
-
-import {
-    getFileSettings,
-    createFileSettings,
-    updateFileSettings
-} from "../../controllers/settingController/fileTypeController.js";
+import express from 'express';
+import { getAll, create, update } from '../../controllers/settingController/fileTypeController.js';
 
 const router = express.Router();
-
-router.get("/", getFileSettings);
-
-router.post("/", createFileSettings);
-
-router.put("/", updateFileSettings);
+router.get('/',  getAll);
+router.post('/', create);
+router.put('/',  update);
 
 export default router;
