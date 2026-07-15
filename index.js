@@ -350,8 +350,6 @@ const startServer = async () => {
     await connectCentralDB();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
-      console.log(`MongoDB Multi-Tenant Mode Active`);
-      console.log(`All routes protected with authMiddleware`);
     });
   } catch (error) {
     console.error('Failed to start server:', error.message);
